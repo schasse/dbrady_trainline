@@ -1,65 +1,105 @@
 # frozen_string_literal: true
 
-require 'pry'
 require 'net/http'
 require 'uri'
 require 'json'
 require 'cgi'
+require 'time'
 
 class ComThetrainline
-  attr_reader :from, :to, :departure_at
+  def self.find(from, to, departure_at)
+    new(from, to, departure_at).segments
+  end
 
   def initialize(from, to, departure_at)
     @from = from
     @to = to
     @departure_at = departure_at
   end
-
-  def self.find(from, to, departure_at)
-    new(from, to, departure_at).segments
-  end
+  attr_reader :from, :to, :departure_at
 
   def segments
-    trainline_journey_search_result['data']['journeySearch']['journeys'].values.map do |journey|
+    journeys =
+      trainline_journey_search_result['data']['journeySearch']['journeys']
+
+    journeys.values.map do |journey|
       departure_at = DateTime.parse(journey['departAt'])
       arrival_at = DateTime.parse(journey['arriveAt'])
-      [
+
+      start_leg = leg_from journey['legs'].first
+      end_leg = leg_from journey['legs'].last
+
+      departure_location = location_from start_leg['departureLocation']
+      arrival_location = location_from end_leg['arrivalLocation']
+
+      section_id = journey['sections'].first
+      next if section_id.nil? # NOTE: unsellable ticket
+
+      fares = trainline_journey_search_result.dig(
+        'data', 'journeySearch', 'sections', section_id, 'alternatives'
+      ).map do |alternative_id|
+        alternative =
+          trainline_journey_search_result
+          .dig('data', 'journeySearch', 'alternatives', alternative_id)
+        fare =
+          trainline_journey_search_result
+          .dig('data', 'journeySearch', 'fares', alternative['fares'].first)
+
+        name = trainline_journey_search_result['data']['fareTypes'][fare['fareType']]['name']
+        price_in_cents = (alternative['fullPrice']['amount'] * 100).to_i
+        currency = alternative['fullPrice']['currencyCode']
+
+        # TODO: could be multiple class
+        # TODO: translate to 1 or 2
+        comfort_class = fare['fareLegs'].first['travelClass']['name']
+
         {
-          departure_station: 'Ashchurch For Tewkesbury',
-          departure_at:,
-          arrival_station: 'Ash',
-          arrival_at:,
-          service_agencies: ['thetrainline'],
-          duration_in_minutes: ((departure_at - arrival_at) * 24 * 60).to_i,
-          changeovers: 2,
-          products: ['train'],
-          fares: ['See below']
-        },
-        {
-          name: 'Advance Single',
-          price_in_cents: 1939,
-          currency: 'GBP',
-          comfort_class: 1,
+          name:,
+          price_in_cents:,
+          currency:,
+          comfort_class:
         }
-      ]
+      end
+
+      {
+        departure_station: departure_location['name'],
+        departure_at:,
+        arrival_station: arrival_location['name'],
+        arrival_at:,
+        service_agencies: ['thetrainline'],
+        duration_in_minutes: ((arrival_at - departure_at) * 24 * 60).to_i,
+        changeovers: (journey['legs'].size - 1),
+        products: ['train'],
+        fares:
+      }
+    rescue StandardError => e
+      binding.pry
     end
+  end
+
+  def leg_from(id)
+    trainline_journey_search_result['data']['journeySearch']['legs'][id]
+  end
+
+  def location_from(id)
+    trainline_journey_search_result['data']['locations'][id]
   end
 
   def trainline_journey_search_result
     @trainline_journey_search_result ||=
       TrainLineApi.journey_search(
-        trainline_origin, trainline_destination, departure_at
+        trainline_origin['code'], trainline_destination['code'], departure_at
       )
   end
 
   def trainline_origin
     @trainline_origin ||=
-      TrainLineApi.location_search(from)['searchLocations'].first['code']
+      TrainLineApi.location_search(from)['searchLocations'].first
   end
 
   def trainline_destination
     @trainline_destination ||=
-      TrainLineApi.location_search(to)['searchLocations'].first['code']
+      TrainLineApi.location_search(to)['searchLocations'].first
   end
 end
 
@@ -67,7 +107,9 @@ class TrainLineApi
   def self.journey_search(origin, destination, depart_after)
     post_body =
       {
-        'passengers' => [{ 'id' => 'pid-0', 'dateOfBirth' => '1991-07-13', 'cardIds' => [] }],
+        'passengers' => [
+          { 'id' => 'pid-0', 'dateOfBirth' => '1991-07-13', 'cardIds' => [] }
+        ],
         'isEurope' => true,
         'cards' => [],
         'transitDefinitions' =>
@@ -76,7 +118,10 @@ class TrainLineApi
             'direction' => 'outward',
             'origin' => origin,
             'destination' => destination,
-            'journeyDate' => { 'type' => 'departAfter', 'time' => depart_after.strftime('%Y-%m-%dT%H:%M:%S') }
+            'journeyDate' => {
+              'type' => 'departAfter',
+              'time' => depart_after.strftime('%Y-%m-%dT%H:%M:%S')
+            }
           }
         ],
         'type' => 'single',
@@ -92,7 +137,8 @@ class TrainLineApi
   def self.location_search(search_term)
     trainline_response_for(
       :get,
-      "/api/locations-search/v2/search?locale=en-US&searchTerm=#{CGI.escape(search_term)}",
+      '/api/locations-search/v2/search?locale=en-US&'\
+      "searchTerm=#{CGI.escape(search_term)}",
       nil
     )
   end
@@ -127,5 +173,3 @@ class TrainLineApi
     end
   end
 end
-
-binding.pry
