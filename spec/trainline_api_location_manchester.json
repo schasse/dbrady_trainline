@@ -1,0 +1,278 @@
+{
+  "searchLocations": [
+    {
+      "name": "Manchester Piccadilly",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MAN2968gb",
+      "score": 0.30943242,
+      "longitude": -2.2309,
+      "latitude": 53.4774,
+      "shortName": "MAN",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Manchester"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Manchester",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:115gb",
+      "score": 0.1635782,
+      "extraInfo": {
+        "subtitle": "Any"
+      },
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Manchester Airport",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MIA2961gb",
+      "score": 0.07036242,
+      "longitude": -2.273,
+      "latitude": 53.365,
+      "shortName": "MIA",
+      "extraInfo": {
+        "attributes": [
+          "Airport"
+        ]
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Manchester Victoria",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MCV2970gb",
+      "score": 0.052415036,
+      "longitude": -2.2426,
+      "latitude": 53.4875,
+      "shortName": "MCV",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Manchester"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Manchester Oxford Road",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MCO2966gb",
+      "score": 0.044067062,
+      "longitude": -2.242,
+      "latitude": 53.474,
+      "shortName": "MCO",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Manchester"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Deansgate",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:DGT2963gb",
+      "score": 0.010373696,
+      "longitude": -2.2511,
+      "latitude": 53.4742,
+      "shortName": "DGT",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Burnley Manchester Road",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:BYM2549gb",
+      "score": 0.0051901015,
+      "longitude": -2.2489,
+      "latitude": 53.785,
+      "shortName": "BYM",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Burnley"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Eccles (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:ECC2950gb",
+      "score": 0.001969332,
+      "longitude": -2.3345,
+      "latitude": 53.4854,
+      "shortName": "ECC",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Mills Hill (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MIH2920gb",
+      "score": 0.0014553105,
+      "longitude": -2.1715,
+      "latitude": 53.5513,
+      "shortName": "MIH",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Mossley (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MSL2903gb",
+      "score": 0.0011755265,
+      "longitude": -2.0413,
+      "latitude": 53.515,
+      "shortName": "MSL",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Swinton (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:SNN2800gb",
+      "score": 0.0011711888,
+      "longitude": -2.3375,
+      "latitude": 53.5148,
+      "shortName": "SNN",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Hale (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:HAL2845gb",
+      "score": 0.0008133255,
+      "longitude": -2.3474,
+      "latitude": 53.3787,
+      "shortName": "HAL",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Castleton (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:CAS2919gb",
+      "score": 0.0006549982,
+      "longitude": -2.1782,
+      "latitude": 53.5918,
+      "shortName": "CAS",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Kearsley (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:KSL2605gb",
+      "score": 0.00029713492,
+      "longitude": -2.3751,
+      "latitude": 53.5441,
+      "shortName": "KSL",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Ince (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:INC2236gb",
+      "score": 0.00022556228,
+      "longitude": -2.6115,
+      "latitude": 53.5389,
+      "shortName": "INC",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Manchester Central Zone",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MCZ0451gb",
+      "score": 7.374152e-05,
+      "shortName": "MCZ",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Clifton (Manchester)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:CLI2795gb",
+      "score": 5.2052834e-05,
+      "longitude": -2.3147,
+      "latitude": 53.5225,
+      "shortName": "CLI",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    }
+  ]
+}

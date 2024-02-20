@@ -1,0 +1,569 @@
+{
+  "searchLocations": [
+    {
+      "name": "London",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:182gb",
+      "score": 1,
+      "extraInfo": {
+        "subtitle": "Any",
+        "attributes": [
+          "BusStation"
+        ]
+      },
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc",
+        "urn:trainline:connection:distribusion",
+        "urn:trainline:connection:pao_sncf"
+      ]
+    },
+    {
+      "name": "London Euston",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:EUS1444gb",
+      "score": 0.4037066,
+      "longitude": -0.1339,
+      "latitude": 51.5281,
+      "shortName": "EUS",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Kings Cross",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:KGX6121gb",
+      "score": 0.30292362,
+      "longitude": -0.1229,
+      "latitude": 51.5309,
+      "shortName": "KGX",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Paddington",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:PAD3087gb",
+      "score": 0.22299217,
+      "longitude": -0.1762,
+      "latitude": 51.516,
+      "shortName": "PAD",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Waterloo",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:WAT5598gb",
+      "score": 0.13911337,
+      "longitude": -0.1131,
+      "latitude": 51.5033,
+      "shortName": "WAT",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Victoria",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:VIC5426gb",
+      "score": 0.11692151,
+      "longitude": -0.1446,
+      "latitude": 51.4953,
+      "shortName": "VIC",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London St Pancras International",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:STP1555gb",
+      "score": 0.11523196,
+      "longitude": -0.1272,
+      "latitude": 51.5324,
+      "shortName": "STP",
+      "extraInfo": {
+        "attributes": [
+          "MainStation"
+        ]
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc",
+        "urn:trainline:connection:eurostardirect",
+        "urn:trainline:connection:pao_sncf"
+      ]
+    },
+    {
+      "name": "Gatwick Airport",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:GTW5416gb",
+      "score": 0.10812675,
+      "longitude": -0.161,
+      "latitude": 51.1565,
+      "shortName": "GTW",
+      "extraInfo": {
+        "attributes": [
+          "Airport"
+        ]
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Bridge",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:LBG5148gb",
+      "score": 0.08800833,
+      "longitude": -0.0861,
+      "latitude": 51.505,
+      "shortName": "LBG",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Liverpool Street",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:LST6965gb",
+      "score": 0.06935606,
+      "longitude": -0.0814,
+      "latitude": 51.518,
+      "shortName": "LST",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Clapham Junction",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:CLJ5595gb",
+      "score": 0.06307719,
+      "longitude": -0.1703,
+      "latitude": 51.4642,
+      "shortName": "CLJ",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 2-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Heathrow Airport",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:193gb",
+      "score": 0.05351248,
+      "extraInfo": {
+        "subtitle": "Any",
+        "attributes": [
+          "Airport"
+        ]
+      },
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Stansted Airport",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:SSD6834gb",
+      "score": 0.049920835,
+      "longitude": 0.2608,
+      "latitude": 51.8886,
+      "shortName": "SSD",
+      "extraInfo": {
+        "attributes": [
+          "Airport"
+        ]
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Stansted"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "East Croydon",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:ECR5355gb",
+      "score": 0.039592687,
+      "longitude": -0.0928,
+      "latitude": 51.3755,
+      "shortName": "ECR",
+      "extraInfo": {
+        "subtitle": "Town centre"
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Croydon"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Marylebone",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:MYB1475gb",
+      "score": 0.038445354,
+      "longitude": -0.1629,
+      "latitude": 51.5225,
+      "shortName": "MYB",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Stratford (London)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:SRA6969gb",
+      "score": 0.025666384,
+      "longitude": -0.0034,
+      "latitude": 51.5419,
+      "shortName": "SRA",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 3-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Blackfriars",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:BFR5112gb",
+      "score": 0.019227015,
+      "longitude": -0.1033,
+      "latitude": 51.5118,
+      "shortName": "BFR",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Finsbury Park",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:FPK6119gb",
+      "score": 0.018207647,
+      "longitude": -0.1063,
+      "latitude": 51.5643,
+      "shortName": "FPK",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 2-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "London Charing Cross",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:CHX5143gb",
+      "score": 0.017179605,
+      "longitude": -0.1248,
+      "latitude": 51.508,
+      "shortName": "CHX",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Luton Airport",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:LUA3667gb",
+      "score": 0.016641725,
+      "shortName": "LUA",
+      "extraInfo": {
+        "subtitle": "by DART",
+        "attributes": [
+          "Airport"
+        ]
+      },
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Tottenham Hale",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:TOM6951gb",
+      "score": 0.015162556,
+      "longitude": -0.0599,
+      "latitude": 51.5883,
+      "shortName": "TOM",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Tottenham"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Vauxhall",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:VXH5597gb",
+      "score": 0.013958835,
+      "longitude": -0.1229,
+      "latitude": 51.4862,
+      "shortName": "VXH",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 2-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Heathrow Terminal 2",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:407gb",
+      "score": 0.010512504,
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Heathrow Terminal 3",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:408gb",
+      "score": 0.010256577,
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Richmond (London)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:RMD5570gb",
+      "score": 0.009697009,
+      "longitude": -0.3016,
+      "latitude": 51.4631,
+      "shortName": "RMD",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 4-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Heathrow Terminal 5",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:418gb",
+      "score": 0.0097186975,
+      "locationType": "stationGroup",
+      "defaultLanguage": "en",
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Sutton (London)",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:SUO5385gb",
+      "score": 0.008252543,
+      "longitude": -0.1912,
+      "latitude": 51.3595,
+      "shortName": "SUO",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Sutton"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Wimbledon",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:WIM5578gb",
+      "score": 0.008369662,
+      "longitude": -0.2064,
+      "latitude": 51.4212,
+      "shortName": "WIM",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 3-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Bromley South",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:BMS5064gb",
+      "score": 0.008165788,
+      "longitude": 0.0173,
+      "latitude": 51.4,
+      "shortName": "BMS",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "Bromley"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    },
+    {
+      "name": "Twickenham",
+      "countryCode": "GB",
+      "code": "urn:trainline:generic:loc:TWI5574gb",
+      "score": 0.00695556,
+      "longitude": -0.3304,
+      "latitude": 51.45,
+      "shortName": "TWI",
+      "locationType": "station",
+      "defaultLanguage": "en",
+      "parent": {
+        "locationType": "stationGroup",
+        "name": "London Underground Zone 5-6"
+      },
+      "timezone": "Europe/London",
+      "connections": [
+        "urn:trainline:connection:atoc"
+      ]
+    }
+  ]
+}
