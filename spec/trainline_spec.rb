@@ -24,43 +24,74 @@ RSpec.describe ComThetrainline do
   end
 
   describe '.find' do
-    before do
-      allow(TrainlineApi).to receive(:journey_search).with(
-        'urn:trainline:generic:loc:182gb',
-        'urn:trainline:generic:loc:MAN2968gb',
-        departure_at
-      ).and_return(journey_london_manchester_response)
-      allow(TrainlineApi).to receive(:location_london_response).with(
-        'London'
-      ).and_return(location_london_response)
-      allow(TrainlineApi).to receive(:location_london_response).with(
-        'Manchester'
-      ).and_return(location_manchester_response)
+    context 'with valid TrainlineApi responses' do
+      before do
+        allow(TrainlineApi).to receive(:journey_search).with(
+          'urn:trainline:generic:loc:182gb',
+          'urn:trainline:generic:loc:MAN2968gb',
+          departure_at
+        ).and_return(journey_london_manchester_response)
+        allow(TrainlineApi).to receive(:location_london_response).with(
+          'London'
+        ).and_return(location_london_response)
+        allow(TrainlineApi).to receive(:location_london_response).with(
+          'Manchester'
+        ).and_return(location_manchester_response)
+      end
+
+      it 'returns sane segments with fares' do
+        from = 'London'
+        to = 'Manchester'
+        segments = ComThetrainline.find(from, to, departure_at)
+        expect(segments.size).to eq 5
+
+        segment = segments.first
+        expect(segment.keys.size).to eq 9
+        expect(segment[:departure_station]).to eq 'London Euston'
+        expect(segment[:departure_at]).to eq DateTime.new(2024, 2, 22, 9, 33)
+        expect(segment[:arrival_station]).to eq 'Manchester Piccadilly'
+        expect(segment[:arrival_at]).to eq DateTime.new(2024, 2, 22, 11, 44)
+        expect(segment[:service_agencies]).to eq ['thetrainline']
+        expect(segment[:duration_in_minutes]).to eq 131
+        expect(segment[:changeovers]).to eq 0
+        expect(segment[:products]).to eq ['train']
+
+        fare = segment[:fares].first
+        expect(fare.keys.size).to eq 4
+        expect(fare[:name]).to eq 'Off-Peak Single'
+        expect(fare[:price_in_cents]).to eq 8925
+        expect(fare[:currency]).to eq 'EUR'
+        expect(fare[:comfort_class]).to eq 2
+      end
     end
 
-    it 'returns sane segments with fares' do
-      from = 'London'
-      to = 'Manchester'
-      segments = ComThetrainline.find(from, to, departure_at)
-      expect(segments.size).to eq 5
+    context 'with TrainlineApi returning an error' do
+      before do
+        allow(TrainlineApi).to receive(:journey_search).and_return(
+          [
+            {
+              'code' => 'ItinerarySearch.Request.Validation'\
+                        '.TransitDefinition.InvalidFormat',
+              'severity' => 'correctable',
+              'detail' => 'TransitDefinitions time must not be'\
+                          ' more than 2 days in the past'
+            }
+          ]
+        )
+        allow(TrainlineApi).to receive(:location_london_response).with(
+          'London'
+        ).and_return(location_london_response)
+        allow(TrainlineApi).to receive(:location_london_response).with(
+          'Manchester'
+        ).and_return(location_manchester_response)
+      end
 
-      segment = segments.first
-      expect(segment.keys.size).to eq 9
-      expect(segment[:departure_station]).to eq 'London Euston'
-      expect(segment[:departure_at]).to eq DateTime.new(2024, 2, 22, 9, 33)
-      expect(segment[:arrival_station]).to eq 'Manchester Piccadilly'
-      expect(segment[:arrival_at]).to eq DateTime.new(2024, 2, 22, 11, 44)
-      expect(segment[:service_agencies]).to eq ['thetrainline']
-      expect(segment[:duration_in_minutes]).to eq 131
-      expect(segment[:changeovers]).to eq 0
-      expect(segment[:products]).to eq ['train']
-
-      fare = segment[:fares].first
-      expect(fare.keys.size).to eq 4
-      expect(fare[:name]).to eq 'Off-Peak Single'
-      expect(fare[:price_in_cents]).to eq 8925
-      expect(fare[:currency]).to eq 'EUR'
-      expect(fare[:comfort_class]).to eq 2
+      it 'returns an empty array' do
+        from = 'London'
+        to = 'Manchester'
+        segments = ComThetrainline.find(from, to, departure_at)
+        expect(segments).to eq []
+      end
     end
   end
 

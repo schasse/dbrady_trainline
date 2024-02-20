@@ -110,6 +110,9 @@ class ComThetrainline
 
   def journeys
     trainline_journey_search_result.dig 'data', 'journeySearch', 'journeys'
+  rescue TypeError
+    warn trainline_journey_search_result.map { "WARN: #{_1['detail']}" }
+    {}
   end
 
   def sections
