@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../trainline'
-require 'pry'
+require_relative '../com_thetrainline'
 
 RSpec.describe ComThetrainline do
   let(:departure_at) { DateTime.new(2024, 2, 22, 9, 30) }
@@ -26,15 +25,15 @@ RSpec.describe ComThetrainline do
 
   describe '.find' do
     before do
-      allow(TrainLineApi).to receive(:journey_search).with(
+      allow(TrainlineApi).to receive(:journey_search).with(
         'urn:trainline:generic:loc:182gb',
         'urn:trainline:generic:loc:MAN2968gb',
         departure_at
       ).and_return(journey_london_manchester_response)
-      allow(TrainLineApi).to receive(:location_london_response).with(
+      allow(TrainlineApi).to receive(:location_london_response).with(
         'London'
       ).and_return(location_london_response)
-      allow(TrainLineApi).to receive(:location_london_response).with(
+      allow(TrainlineApi).to receive(:location_london_response).with(
         'Manchester'
       ).and_return(location_manchester_response)
     end
@@ -62,6 +61,47 @@ RSpec.describe ComThetrainline do
       expect(fare[:price_in_cents]).to eq 8925
       expect(fare[:currency]).to eq 'EUR'
       expect(fare[:comfort_class]).to eq 2
+    end
+  end
+
+  describe '#comfort_class_for' do
+    let(:com_thetrainline) { ComThetrainline.new(nil, nil, nil) }
+    {
+      %w[First Second] => 2,
+      %w[Second First] => 2,
+      %w[first first] => 1,
+      %w[Second Second] => 2
+    }.each do |comfort_classes, result|
+      it "returns the lowest comfort class (#{comfort_classes} => #{result})" do
+        fare_stub = {
+          'fareLegs' =>
+          comfort_classes.map do
+            {
+              'travelClass' => { 'name' => _1 }
+            }
+          end
+        }
+
+        expect(com_thetrainline.comfort_class_for(fare_stub)).to eq result
+      end
+    end
+  end
+
+  describe '#times_for' do
+    let(:com_thetrainline) { ComThetrainline.new(nil, nil, nil) }
+    let(:journey) do
+      {
+        'departAt' => '2023-12-01T08:00:00',
+        'arriveAt' => '2023-12-01T10:30:00'
+      }
+    end
+
+    it 'returns the correct departure and arrival times' do
+      times = com_thetrainline.times_for journey
+
+      expect(times[:departure_at]).to eq DateTime.new(2023, 12, 1, 8)
+      expect(times[:arrival_at]).to eq DateTime.new(2023, 12, 1, 10, 30)
+      expect(times[:duration_in_minutes]).to eq 150
     end
   end
 end
