@@ -39,11 +39,29 @@ RSpec.describe ComThetrainline do
       ).and_return(location_manchester_response)
     end
 
-    it 'returns the segments' do
+    it 'returns sane segments with fares' do
       from = 'London'
       to = 'Manchester'
-      res = ComThetrainline.find(from, to, departure_at)
-      binding.pry
+      segments = ComThetrainline.find(from, to, departure_at)
+      expect(segments.size).to eq 5
+
+      segment = segments.first
+      expect(segment.keys.size).to eq 9
+      expect(segment[:departure_station]).to eq 'London Euston'
+      expect(segment[:departure_at]).to eq DateTime.new(2024, 2, 22, 9, 33)
+      expect(segment[:arrival_station]).to eq 'Manchester Piccadilly'
+      expect(segment[:arrival_at]).to eq DateTime.new(2024, 2, 22, 11, 44)
+      expect(segment[:service_agencies]).to eq ['thetrainline']
+      expect(segment[:duration_in_minutes]).to eq 131
+      expect(segment[:changeovers]).to eq 0
+      expect(segment[:products]).to eq ['train']
+
+      fare = segment[:fares].first
+      expect(fare.keys.size).to eq 4
+      expect(fare[:name]).to eq 'Off-Peak Single'
+      expect(fare[:price_in_cents]).to eq 8925
+      expect(fare[:currency]).to eq 'EUR'
+      expect(fare[:comfort_class]).to eq 2
     end
   end
 end
