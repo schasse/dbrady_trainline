@@ -19,71 +19,113 @@ class ComThetrainline
   attr_reader :from, :to, :departure_at
 
   def segments
-    journeys =
-      trainline_journey_search_result['data']['journeySearch']['journeys']
-
     journeys.values.map do |journey|
-      departure_at = DateTime.parse(journey['departAt'])
-      arrival_at = DateTime.parse(journey['arriveAt'])
-
-      start_leg = leg_from journey['legs'].first
-      end_leg = leg_from journey['legs'].last
-
-      departure_location = location_from start_leg['departureLocation']
-      arrival_location = location_from end_leg['arrivalLocation']
-
       section_id = journey['sections'].first
       next if section_id.nil? # NOTE: unsellable ticket
 
-      fares = trainline_journey_search_result.dig(
-        'data', 'journeySearch', 'sections', section_id, 'alternatives'
-      ).map do |alternative_id|
-        alternative =
-          trainline_journey_search_result
-          .dig('data', 'journeySearch', 'alternatives', alternative_id)
-        fare =
-          trainline_journey_search_result
-          .dig('data', 'journeySearch', 'fares', alternative['fares'].first)
-
-        name = trainline_journey_search_result['data']['fareTypes'][fare['fareType']]['name']
-        price_in_cents = (alternative['fullPrice']['amount'] * 100).to_i
-        currency = alternative['fullPrice']['currencyCode']
-
-        # TODO: could be multiple class
-        # TODO: translate to 1 or 2
-        comfort_class = fare['fareLegs'].first['travelClass']['name']
-
-        {
-          name:,
-          price_in_cents:,
-          currency:,
-          comfort_class:
-        }
-      end
+      fares = fares_for section_id
+      times = times_for journey
 
       {
-        departure_station: departure_location['name'],
-        departure_at:,
-        arrival_station: arrival_location['name'],
-        arrival_at:,
+        departure_station: departure_station_for(journey),
+        departure_at: times[:departure_at],
+        arrival_station: arrival_station_for(journey),
+        arrival_at: times[:arrival_at],
         service_agencies: ['thetrainline'],
-        duration_in_minutes: ((arrival_at - departure_at) * 24 * 60).to_i,
+        duration_in_minutes: times[:duration_in_minutes],
         changeovers: (journey['legs'].size - 1),
         products: ['train'],
         fares:
       }
-    rescue StandardError => e
-      binding.pry
     end
   end
 
-  def leg_from(id)
-    trainline_journey_search_result['data']['journeySearch']['legs'][id]
+  def departure_station_for(journey)
+    start_leg = legs[journey['legs'].first]
+    departure_location = locations[start_leg['departureLocation']]
+    departure_location['name']
   end
 
-  def location_from(id)
-    trainline_journey_search_result['data']['locations'][id]
+  def arrival_station_for(journey)
+    end_leg = legs[journey['legs'].last]
+    arrival_location = locations[end_leg['arrivalLocation']]
+    arrival_location['name']
   end
+
+  def times_for(journey)
+    departure_at = DateTime.parse(journey['departAt'])
+    arrival_at = DateTime.parse(journey['arriveAt'])
+    {
+      departure_at:,
+      arrival_at:,
+      duration_in_minutes: ((arrival_at - departure_at) * 24 * 60).to_i
+    }
+  end
+
+  def fares_for(section_id)
+    sections.dig(section_id, 'alternatives').map do |alternative_id|
+      alternative = alternatives[alternative_id]
+      {
+        name: fare_name_for(alternative),
+        price_in_cents: price_in_cents_for(alternative),
+        currency: currency_for(alternative),
+        comfort_class: comfort_class_for(alternative)
+      }
+    end
+  end
+
+  def fare_name_for(alternative)
+    # TODO: concat types
+    fare = fares[alternative['fares'].first]
+    fare_types[fare['fareType']]['name']
+  end
+
+  def price_in_cents_for(alternative)
+    (alternative.dig('fullPrice', 'amount') * 100).to_i
+  end
+
+  def currency_for(alternative)
+    alternative.dig 'fullPrice', 'currencyCode'
+  end
+
+  def comfort_class_for(alternative)
+    # TODO: could be multiple class
+    # TODO: translate to 1 or 2
+    fare = fares[alternative['fares'].first]
+    fare['fareLegs'].first['travelClass']['name']
+  end
+
+  # below: data from response
+
+  def journeys
+    trainline_journey_search_result.dig 'data', 'journeySearch', 'journeys'
+  end
+
+  def sections
+    trainline_journey_search_result.dig 'data', 'journeySearch', 'sections'
+  end
+
+  def legs
+    trainline_journey_search_result.dig 'data', 'journeySearch', 'legs'
+  end
+
+  def locations
+    trainline_journey_search_result.dig 'data', 'locations'
+  end
+
+  def fares
+    trainline_journey_search_result.dig 'data', 'journeySearch', 'fares'
+  end
+
+  def fare_types
+    trainline_journey_search_result.dig 'data', 'fareTypes'
+  end
+
+  def alternatives
+    trainline_journey_search_result.dig 'data', 'journeySearch', 'alternatives'
+  end
+
+  # below: caching the trainline reqeusts
 
   def trainline_journey_search_result
     @trainline_journey_search_result ||=
